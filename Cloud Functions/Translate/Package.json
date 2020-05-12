@@ -1,0 +1,8 @@
+{
+  "main": "index.js",
+  "name": "sample-http",
+  "version": "1.0.0",
+  "dependencies": {
+    "@google-cloud/translate": "^1.1.0"
+  }
+}
