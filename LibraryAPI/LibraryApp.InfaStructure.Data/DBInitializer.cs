@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LibraryApp.InfaStructure.Data
 {
-    public class DBInitializer : IDBInitializer
+    public class DBInitializer 
     {
-        public void SeedDb(LibraryAppContext ctx)
+        public static void SeedDb(LibraryAppContext ctx)
         {
             List<Users> users = new List<Users>
             {
@@ -20,6 +20,15 @@ namespace LibraryApp.InfaStructure.Data
                     Lastname = "Peteresen",
                 }
             };
+
+            var book1 = ctx.Book.Add(new Books()
+            {
+                BookTitle = "Shining",
+                Author = "Steven King",
+                Released = DateTime.Now,
+                RentedDate = DateTime.Now
+
+            }).Entity;
 
             List<Books> books = new List<Books>
             {
@@ -37,8 +46,9 @@ namespace LibraryApp.InfaStructure.Data
                 }
             };
 
-            ctx.Book.AddRange(books);
+            ctx.Book.AddRange(book1);
             ctx.User.AddRange(users);
+            ctx.SaveChanges();
         }
     }
 }

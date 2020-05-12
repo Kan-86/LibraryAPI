@@ -34,8 +34,8 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
 
         public IEnumerable<Books> GetAll()
         {
-            return ctx.Book.
-                Include(c => c.CurrentUser);
+            var result = ctx.Book.ToList();
+            return result;
         }
 
         public Books GetById(int id)
