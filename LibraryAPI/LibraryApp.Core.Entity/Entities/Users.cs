@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryApp.Core.Entity.Entities
 {
-    public class User
+    public class Users
     {
         public int Id { get; set; }
         public string Surname { get; set; }
