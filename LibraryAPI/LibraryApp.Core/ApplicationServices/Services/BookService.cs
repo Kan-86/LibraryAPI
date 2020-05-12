@@ -9,7 +9,7 @@ namespace LibraryApp.Core.ApplicationServices.Services
     public class BookService : IService<Books>
     {
         IRepositories<Books> repos;
-        private BookService(IRepositories<Books> _repos)
+        public BookService(IRepositories<Books> _repos)
         {
             repos = _repos;
         }
@@ -39,7 +39,7 @@ namespace LibraryApp.Core.ApplicationServices.Services
 
         public IEnumerable<Books> GetAll()
         {
-            throw new NotImplementedException();
+            return repos.GetAll();
         }
 
         public Books GetById(int id)
