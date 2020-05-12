@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApp.Core", "LibraryA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApp.Core.Entity", "LibraryApp.Core.Entity\LibraryApp.Core.Entity.csproj", "{2C499880-11C4-41F9-B47F-635888EF3BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.InfaStructure.Data", "LibraryApp.InfaStructure.Data\LibraryApp.InfaStructure.Data.csproj", "{DF288F76-8AED-4A64-85DB-A72EFA2AAFEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApp.InfaStructure.Data", "LibraryApp.InfaStructure.Data\LibraryApp.InfaStructure.Data.csproj", "{DF288F76-8AED-4A64-85DB-A72EFA2AAFEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +46,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FAEE576C-C3D1-45F3-8452-6D9A4832CEB0} = {84168518-D1EF-4EFA-84A8-14E974718E77}
 		{C4456668-FBED-47E9-A875-A2173DD69506} = {6EB266A3-2FC8-40AF-8458-9419E28FACC7}
 		{2C499880-11C4-41F9-B47F-635888EF3BAF} = {6EB266A3-2FC8-40AF-8458-9419E28FACC7}
 		{DF288F76-8AED-4A64-85DB-A72EFA2AAFEB} = {DC80EF32-35EC-45FA-890B-F6D0E63B2699}

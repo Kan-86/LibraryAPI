@@ -10,6 +10,6 @@ namespace LibraryApp.Core.ApplicationServices
         T Add(T entity);
         T GetById(int id);
         T Delete(int id);
-        T Update(int id);
+        T Update(T entity);
     }
 }

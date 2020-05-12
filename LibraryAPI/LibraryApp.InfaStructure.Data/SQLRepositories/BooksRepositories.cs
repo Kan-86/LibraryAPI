@@ -1,36 +1,56 @@
 ﻿using LibraryApp.Core.DomainServices;
 using LibraryApp.Core.Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryApp.InfaStructure.Data.SQLRepositories
 {
     public class BooksRepositories : IRepositories<Books>
     {
-        public Books Add(Books entity)
+        readonly LibraryAppContext ctx;
+
+        public BooksRepositories(LibraryAppContext _ctx)
         {
-            throw new NotImplementedException();
+            ctx = _ctx;
+        }
+
+        public Books Add(Books book)
+        {
+            ctx.Attach(book).State = EntityState.Added;
+            ctx.SaveChanges();
+            return book;
         }
 
         public Books Delete(int id)
         {
-            throw new NotImplementedException();
+            var mainBookDelete = ctx.Book.ToList().FirstOrDefault(b => b.Id == id);
+            ctx.Book.Remove(mainBookDelete);
+            ctx.SaveChanges();
+            return mainBookDelete;
         }
 
         public IEnumerable<Books> GetAll()
         {
-            throw new NotImplementedException();
+            return ctx.Book.
+                Include(c => c.CurrentUser);
         }
 
         public Books GetById(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Book.
+                Include(c => c.CurrentUser)
+                .FirstOrDefault(b => b.Id == id);
         }
 
-        public Books Update(int id)
+        public Books Update(Books book)
         {
-            throw new NotImplementedException();
+            var result = ctx.Book.SingleOrDefault(b => b.Id == book.Id);
+            result.RentedDate = DateTime.Now;
+            ctx.SaveChanges();
+            return book;
         }
     }
 }

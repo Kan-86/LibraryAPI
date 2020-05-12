@@ -28,7 +28,7 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
             throw new NotImplementedException();
         }
 
-        public Users Update(int id)
+        public Users Update(Users user)
         {
             throw new NotImplementedException();
         }

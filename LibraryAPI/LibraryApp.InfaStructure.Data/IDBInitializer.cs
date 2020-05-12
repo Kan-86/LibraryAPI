@@ -6,6 +6,6 @@ namespace LibraryApp.InfaStructure.Data
 {
     public interface IDBInitializer
     {
-        void SeedDb(CantinaAppContext ctx);
+        void SeedDb(LibraryAppContext ctx);
     }
 }

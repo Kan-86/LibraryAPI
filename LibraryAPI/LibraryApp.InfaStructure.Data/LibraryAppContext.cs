@@ -11,6 +11,10 @@ namespace LibraryApp.InfaStructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Books>()
+                .HasOne(a => a.CurrentUser);
         }
 
         public DbSet<Users> User { get; set; }
