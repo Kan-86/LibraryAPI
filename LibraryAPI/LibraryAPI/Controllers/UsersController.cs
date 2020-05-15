@@ -11,35 +11,21 @@ namespace LibraryAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly IService<Books> _bookService;
-        public BooksController(IService<Books> bookService)
+        private readonly IService<Users> _userService;
+        public UsersController(IService<Users> userservice)
         {
-            _bookService = bookService;
-        }
-        // GET: api/Books
-        [HttpGet]
-        public ActionResult<IEnumerable<Books>> Get()
-        {
-            try
-            {
-                var result = _bookService.GetAll().ToList();
-                return Ok(result);
-            }
-            catch(Exception e)
-            {
-                return BadRequest(e);
-            }
+            _userService = userservice;
         }
 
-        // GET: api/Books/5
-        [HttpGet("{id}", Name = "Get")]
-        public ActionResult<IEnumerable<Books>> GetById(int id)
+        // GET: api/Books
+        [HttpGet]
+        public ActionResult<IEnumerable<Users>> Get()
         {
             try
             {
-                var result = _bookService.GetById(id);
+                var result = _userService.GetAll().ToList();
                 return Ok(result);
             }
             catch (Exception e)
@@ -48,13 +34,28 @@ namespace LibraryAPI.Controllers
             }
         }
 
+        //// GET: api/Books/5
+        //[HttpGet("{id}", Name = "Get")]
+        //public ActionResult<IEnumerable<Users>> GetUserById(int id)
+        //{
+        //    try
+        //    {
+        //        var result = _userService.GetById(id);
+        //        return Ok(result);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e);
+        //    }
+        //}
+
         // POST: api/Books
         [HttpPost]
-        public ActionResult<IEnumerable<Books>> Post([FromBody] Books book)
+        public ActionResult<IEnumerable<Users>> Post([FromBody] Users user)
         {
             try
             {
-                return Ok(_bookService.Add(book));
+                return Ok(_userService.Add(user));
             }
             catch (Exception e)
             {
@@ -64,11 +65,11 @@ namespace LibraryAPI.Controllers
 
         // PUT: api/Books/5
         [HttpPut("{id}")]
-        public ActionResult<IEnumerable<Books>> Put(int id, [FromBody] Books book)
+        public ActionResult<IEnumerable<Users>> Put(int id, [FromBody] Users user)
         {
             try
             {
-                return Ok(_bookService.Update(book));
+                return Ok(_userService.Update(user));
             }
             catch (Exception e)
             {
@@ -78,11 +79,11 @@ namespace LibraryAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public ActionResult<IEnumerable<Books>> Delete(int id)
+        public ActionResult<IEnumerable<Users>> Delete(int id)
         {
             try
             {
-                return Ok(_bookService.Delete(id));
+                return Ok(_userService.Delete(id));
             }
             catch (Exception e)
             {

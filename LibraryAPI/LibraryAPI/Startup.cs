@@ -39,7 +39,9 @@ namespace LibraryAPI
             }
             else
             {
-                services.AddDbContext<LibraryAppContext>(opt => opt.UseInMemoryDatabase("Library"));
+                // Azure SQL database:
+                services.AddDbContext<LibraryAppContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
 
             services.AddScoped<IRepositories<Users>, UserRepositories>();

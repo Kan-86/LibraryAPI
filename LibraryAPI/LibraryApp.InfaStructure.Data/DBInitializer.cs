@@ -43,10 +43,16 @@ namespace LibraryApp.InfaStructure.Data
                     Author = "H.P Lovecraft",
                     Released = DateTime.Now,
                     RentedDate = DateTime.Now
+                },
+                new Books {
+                    BookTitle = "The Last Wish",
+                    Author = "Andrzej Sapkowski",
+                    Released = DateTime.Now,
+                    RentedDate = DateTime.Now
                 }
             };
 
-            ctx.Book.AddRange(book1);
+            ctx.Book.AddRange(books);
             ctx.User.AddRange(users);
             ctx.SaveChanges();
         }

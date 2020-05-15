@@ -47,10 +47,11 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
 
         public Books Update(Books book)
         {
-            var result = ctx.Book.SingleOrDefault(b => b.Id == book.Id);
-            result.RentedDate = DateTime.Now;
-            ctx.SaveChanges();
-            return book;
+            //var result = ctx.Book.SingleOrDefault(b => b.Id == book.Id);
+            //result.RentedDate = DateTime.Now;
+            //ctx.SaveChanges();
+            //return book;
+            return null;
         }
     }
 }
