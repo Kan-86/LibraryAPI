@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryIndexService.Models
+namespace LibraryStorage.Models
 {
     public class Books
     {
