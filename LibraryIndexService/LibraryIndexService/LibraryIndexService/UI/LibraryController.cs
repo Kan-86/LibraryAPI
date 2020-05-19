@@ -35,27 +35,16 @@ namespace LibraryStorage.UI
         private static void DesierializeJson(byte[] json)
         {
             string download = Encoding.ASCII.GetString(json);
-            bookList = (new JavaScriptSerializer()).Deserialize<List<Books>>(download);
+            bookList = new JavaScriptSerializer().Deserialize<List<Books>>(download);
             if (bookList.Count > 0)
             {
-                foreach (Books food in bookList)
-                {
-                    //Console.WriteLine($"Book Id: {food.Id}\n" +
-                    //    $"Book title: {food.BookTitle}\n" +
-                    //    $"Book author: {food.Author}\n" +
-                    //    $"Book CurrentUser: {food.CurrentUser}\n" +
-                    //    $"Book InRent: {food.InRent}\n" +
-                    //    $"Book releasedDate: {food.Released}\n" +
-                    //    $"Book rentedDate: {food.RentedDate}\n");
-                }
+                Console.WriteLine("Fetching data.");
             }
             else
             {
                 Console.WriteLine("No records found.");
             }
         }
-
-        
 
         public List<Books> GetList()
         {

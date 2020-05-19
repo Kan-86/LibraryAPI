@@ -1,8 +1,4 @@
-﻿
-
-using LibraryStorage.Models;
-using LibraryStorage.Repo;
-using LibraryStorage.UI;
+﻿using LibraryIndex.Models;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.ServiceBus.Core;
 using Newtonsoft.Json;
@@ -11,46 +7,28 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryStorage
+namespace LibraryIndex.Data
 {
-    class Program
+    public class MessagePublisher
     {
-        private static string URL = "https://libtestapi.azurewebsites.net/books";
-        private static LibraryController libs;
-
+        private static List<Books> bookList;
         // Connection String for the namespace can be obtained from the Azure portal under the 
         // 'Shared Access policies' section.
         const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string BasicQueueName = "libraryindexerqueue";
-
-        static void Main(string[] args)
+        const string BasicQueueName = "libraryaddbookqueue";
+        public async Task MainAsync()
         {
-            libs = new LibraryController();
-            libs.GetLibrary(URL);
-            MessageListener mListener = new MessageListener();
-            mListener.MainAsync().GetAwaiter().GetResult();
-            MainAsync().GetAwaiter().GetResult();
-        }
-
-        static async Task MainAsync()
-        {
-
-            // send a set of messages
             await SendMessagesAsync(ServiceBusConnectionString, BasicQueueName);
         }
 
         static async Task SendMessagesAsync(string connectionString, string queueName)
         {
+            CreateBook();
             var sender = new MessageSender(connectionString, queueName);
-
-            Console.WriteLine("Sending messages to Queue...");
-
-            List<Books> data = libs.GetList();
-
             // send a message for each entry in the above array
-            for (int i = 0; i < data.Count; i++)
+            for (int i = 0; i < bookList.Count; i++)
             {
-                var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data[i])))
+                var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(bookList[i])))
                 {
                     ContentType = "application/json",
                     Label = "Scientist",
@@ -66,6 +44,33 @@ namespace LibraryStorage
                     Console.ResetColor();
                 }
             }
+        }
+
+        private static void CreateBook()
+        {
+            Console.WriteLine("Please enter the title: ");
+            var bookTitle = Console.ReadLine();
+
+            Console.WriteLine("Please enter the book author: ");
+            var bookAuthor = Console.ReadLine();
+
+            bookList = new List<Books>()
+            {
+                new Books
+                {
+                    BookTitle = bookTitle,
+                    Author = bookAuthor,
+                    Released = DateTime.Now,
+                    InRent = false,
+                    CurrentUser = null,
+                    RentedDate = DateTime.Now
+                }
+            };
+        }
+
+        public List<Books> GetList()
+        {
+            return bookList;
         }
     }
 }

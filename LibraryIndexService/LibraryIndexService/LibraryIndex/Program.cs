@@ -14,7 +14,7 @@ namespace LibraryIndex
         {
             Console.WriteLine("Library Indexer, browse the library.\n" +
                         "\t 1. Get all the books. \n" +
-                        "\t 2. Something else.");
+                        "\t 2. Add a book to the Library.");
             string choice = Console.ReadLine();
             LibraryIndexPicker(choice);
         }
@@ -22,6 +22,7 @@ namespace LibraryIndex
         private static void LibraryIndexPicker(string choice)
         {
             MessageListener mListener = new MessageListener();
+            MessagePublisher mPublisher = new MessagePublisher();
             switch (choice)
             {
                 case "1":
@@ -29,7 +30,7 @@ namespace LibraryIndex
                     mListener.MainAsync().GetAwaiter().GetResult();
                     break;
                 case "2":
-                    Console.WriteLine("Case 2");
+                    mPublisher.MainAsync().GetAwaiter().GetResult();
                     break;
                 default:
                     Console.WriteLine("Default case");
