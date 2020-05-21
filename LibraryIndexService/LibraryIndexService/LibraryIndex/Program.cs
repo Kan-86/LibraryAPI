@@ -1,15 +1,12 @@
 ﻿using LibraryIndex.Data;
+using LibraryIndex.UI;
 using System;
 
 namespace LibraryIndex
 {
     class Program
     {
-        // Connection String for the namespace can be obtained from the Azure portal under the 
-        // 'Shared Access policies' section.
-        const string serviceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string libraryQueue = "libraryindexerqueue";
-        const string userQueue = "userindexqueue";
+        private static IndexController indexController;
 
         static void Main(string[] args)
         {
@@ -28,20 +25,19 @@ namespace LibraryIndex
 
         private static void LibraryIndexPicker(string choice)
         {
-            MessageListener mListener = new MessageListener();
-            MessagePublisher mPublisher = new MessagePublisher();
+            indexController = new IndexController();
             switch (choice)
             {
                 case "1":
                     Console.WriteLine("All the books available in the Library.");
-                    mListener.MainAsync(libraryQueue, serviceBusConnectionString).GetAwaiter().GetResult();
+                    indexController.GetAllBooks();
                     break;
                 case "2":
-                    mPublisher.MainAsync().GetAwaiter().GetResult();
+                    indexController.CreateBook();
                     break;
                 case "3":
                     Console.WriteLine("Select a user.");
-                    mListener.MainAsync(userQueue, serviceBusConnectionString).GetAwaiter().GetResult();
+                    indexController.SelectUsers();
                     break;
                 default:
                     Console.WriteLine("Not in the list");

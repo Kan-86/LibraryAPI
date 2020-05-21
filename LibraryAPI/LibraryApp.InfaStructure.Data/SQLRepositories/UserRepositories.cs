@@ -42,6 +42,12 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
                 .FirstOrDefault(b => b.Id == id);
         }
 
+        public Users GetByName(string name)
+        {
+            return ctx.User
+                .FirstOrDefault(b => b.Surname == name);
+        }
+
         public Users Update(Users user)
         {
             var result = ctx.User.SingleOrDefault(b => b.Id == user.Id);

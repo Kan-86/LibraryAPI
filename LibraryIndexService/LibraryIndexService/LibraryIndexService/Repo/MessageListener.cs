@@ -40,8 +40,6 @@ namespace LibraryStorage.Repo
                         var body = message.Body;
 
                         book = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
-
-
                     }
                     else
                     {

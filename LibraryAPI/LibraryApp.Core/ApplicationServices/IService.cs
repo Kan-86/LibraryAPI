@@ -10,6 +10,7 @@ namespace LibraryApp.Core.ApplicationServices
         IEnumerable<T> GetAll();
         T Add(T entity);
         T GetById(int id);
+        T GetByName(string name);
         T Delete(int id);
         T Update(T entity);
     }

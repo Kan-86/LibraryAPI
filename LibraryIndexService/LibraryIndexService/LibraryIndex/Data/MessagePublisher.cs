@@ -12,18 +12,19 @@ namespace LibraryIndex.Data
     public class MessagePublisher
     {
         private static List<Books> bookList;
-        // Connection String for the namespace can be obtained from the Azure portal under the 
-        // 'Shared Access policies' section.
-        const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string BasicQueueName = "libraryaddbookqueue";
-        public async Task MainAsync()
+
+        public async Task MainAsync(string connectionString, string queue)
         {
-            await SendMessagesAsync(ServiceBusConnectionString, BasicQueueName);
+            await SendMessagesAsync(connectionString, queue);
         }
 
         static async Task SendMessagesAsync(string connectionString, string queueName)
         {
-            CreateBook();
+            if (queueName == "libraryindexqueue")
+            {
+                CreateBook();
+            }
+            
             var sender = new MessageSender(connectionString, queueName);
             // send a message for each entry in the above array
             for (int i = 0; i < bookList.Count; i++)

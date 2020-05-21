@@ -6,12 +6,12 @@ namespace LibraryStorage
     class Program
     {
         private static string URL = "https://libtestapi.azurewebsites.net/books";
-        private static LibraryController libs;
+        private static StorageController libs;
         private static MessagePublisher mPub;
 
         static void Main(string[] args)
         {
-            libs = new LibraryController();
+            libs = new StorageController();
             mPub = new MessagePublisher();
             libs.GetLibrary(URL);
             libs.CreateBook();

@@ -13,12 +13,12 @@ namespace LibraryStorage.Repo
 {
     public class MessagePublisher
     {
-        private static LibraryController libs;
+        private static StorageController libs;
         const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string BasicQueueName = "libraryindexerqueue";
+        const string BasicQueueName = "libraryindexqueue";
         public async Task MainAsync()
         {
-            libs = new LibraryController();
+            libs = new StorageController();
             await SendMessagesAsync(ServiceBusConnectionString, BasicQueueName);
         }
 

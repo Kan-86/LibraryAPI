@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryApp.Core.Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,5 +12,6 @@ namespace LibraryApp.Core.DomainServices
         T GetById(int id);
         T Delete(int id);
         T Update(T entity);
+        T GetByName(string name);
     }
 }

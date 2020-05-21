@@ -51,6 +51,11 @@ namespace LibraryApp.Core.ApplicationServices.Services
             return repos.GetById(id);
         }
 
+        public Books GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public Books Update(Books entity)
         {
             if (entity.Id <= 0)

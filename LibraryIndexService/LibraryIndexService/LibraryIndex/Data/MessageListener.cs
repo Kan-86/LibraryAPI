@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.ServiceBus.Core;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace LibraryIndex.Data
 {
     public class MessageListener
     {
+        private static dynamic dynamicList;
         public async Task MainAsync(string queue, string connection)
         {
             await PeekMessagesAsync(connection, queue);
@@ -28,8 +30,8 @@ namespace LibraryIndex.Data
                     // If the returned message value is null, we have reached the bottom of the log
                     if (message != null)
                     {
-                        // print the message
-                        var body = Encoding.UTF8.GetString(message.Body);
+                        var body = message.Body;
+                        dynamicList = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
                         lock (Console.Out)
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -44,7 +46,7 @@ namespace LibraryIndex.Data
                                 message.Size,
                                 message.ExpiresAtUtc,
                                 "", //message.SystemProperties.State,// TODO: Need to restore that property
-                                body);
+                                dynamicList);
                             Console.ResetColor();
                         }
                     }
@@ -64,6 +66,11 @@ namespace LibraryIndex.Data
                 }
             }
             await receiver.CloseAsync();
+        }
+
+        public dynamic PeekQueue()
+        {
+            return dynamicList;
         }
     }
 }

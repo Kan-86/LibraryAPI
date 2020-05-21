@@ -45,6 +45,11 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
                 .FirstOrDefault(b => b.Id == id);
         }
 
+        public Books GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public Books Update(Books book)
         {
             //var result = ctx.Book.SingleOrDefault(b => b.Id == book.Id);

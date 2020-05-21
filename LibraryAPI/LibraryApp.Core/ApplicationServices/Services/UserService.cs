@@ -46,6 +46,11 @@ namespace LibraryApp.Core.ApplicationServices.Services
             return repos.GetById(id);
         }
 
+        public Users GetByName(string name)
+        {
+            return repos.GetByName(name);
+        }
+
         public Users Update(Users user)
         {
             return repos.Update(user);

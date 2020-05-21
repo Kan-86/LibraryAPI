@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LibraryStorage.UI
 {
-    public class LibraryController
+    public class StorageController
     {
         private static List<Books> bookList;
         public void GetLibrary(string URL)
