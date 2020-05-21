@@ -5,6 +5,12 @@ namespace LibraryIndex
 {
     class Program
     {
+        // Connection String for the namespace can be obtained from the Azure portal under the 
+        // 'Shared Access policies' section.
+        const string serviceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
+        const string libraryQueue = "libraryindexerqueue";
+        const string userQueue = "userindexqueue";
+
         static void Main(string[] args)
         {
             UserChoice();
@@ -14,7 +20,8 @@ namespace LibraryIndex
         {
             Console.WriteLine("Library Indexer, browse the library.\n" +
                         "\t 1. Get all the books. \n" +
-                        "\t 2. Add a book to the Library.");
+                        "\t 2. Add a book to the Library. \n" +
+                        "\t 3. Rent a book.");
             string choice = Console.ReadLine();
             LibraryIndexPicker(choice);
         }
@@ -27,13 +34,17 @@ namespace LibraryIndex
             {
                 case "1":
                     Console.WriteLine("All the books available in the Library.");
-                    mListener.MainAsync().GetAwaiter().GetResult();
+                    mListener.MainAsync(libraryQueue, serviceBusConnectionString).GetAwaiter().GetResult();
                     break;
                 case "2":
                     mPublisher.MainAsync().GetAwaiter().GetResult();
                     break;
+                case "3":
+                    Console.WriteLine("Select a user.");
+                    mListener.MainAsync(userQueue, serviceBusConnectionString).GetAwaiter().GetResult();
+                    break;
                 default:
-                    Console.WriteLine("Default case");
+                    Console.WriteLine("Not in the list");
                     break;
             }
         }

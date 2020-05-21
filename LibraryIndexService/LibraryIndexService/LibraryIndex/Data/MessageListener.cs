@@ -9,14 +9,9 @@ namespace LibraryIndex.Data
 {
     public class MessageListener
     {
-        // Connection String for the namespace can be obtained from the Azure portal under the 
-        // 'Shared Access policies' section.
-        const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string BasicQueueName = "libraryindexerqueue";
-
-        public async Task MainAsync()
+        public async Task MainAsync(string queue, string connection)
         {
-            await PeekMessagesAsync(ServiceBusConnectionString, BasicQueueName);
+            await PeekMessagesAsync(connection, queue);
         }
 
         static async Task PeekMessagesAsync(string connectionString, string queueName)

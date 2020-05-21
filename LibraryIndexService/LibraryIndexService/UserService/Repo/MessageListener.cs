@@ -14,7 +14,7 @@ namespace UserService.Repo
         // Connection String for the namespace can be obtained from the Azure portal under the 
         // 'Shared Access policies' section.
         const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
-        const string BasicQueueName = "libraryaddbookqueue";
+        const string BasicQueueName = "userindexqueue";
 
         public async Task MainAsync()
         {
