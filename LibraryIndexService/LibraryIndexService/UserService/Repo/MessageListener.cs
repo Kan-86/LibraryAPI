@@ -1,5 +1,4 @@
-﻿using LibraryStorage.Models;
-using Microsoft.Azure.ServiceBus;
+﻿using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.ServiceBus.Core;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryStorage.Repo
+namespace UserService.Repo
 {
     public class MessageListener
     {
@@ -16,7 +15,6 @@ namespace LibraryStorage.Repo
         // 'Shared Access policies' section.
         const string ServiceBusConnectionString = "Endpoint=sb://libraryapi.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=krLVo6p2VJLKy/AQyVLlAMCMukWw3uxiNWgyiDeGivs=";
         const string BasicQueueName = "libraryaddbookqueue";
-        private static dynamic book;
 
         public async Task MainAsync()
         {
@@ -39,9 +37,12 @@ namespace LibraryStorage.Repo
                     {
                         var body = message.Body;
 
-                        book = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
+                        dynamic book = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
 
-
+                        WebClient Client = new WebClient();
+                        string Json = Newtonsoft.Json.JsonConvert.SerializeObject(book);
+                        Client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                        Client.UploadString("https://libtestapi.azurewebsites.net/books", "POST", Json);
                     }
                     else
                     {
@@ -59,10 +60,6 @@ namespace LibraryStorage.Repo
                 }
             }
             await receiver.CloseAsync();
-        }
-        public dynamic BookCreated()
-        {
-            return book;
         }
     }
 }

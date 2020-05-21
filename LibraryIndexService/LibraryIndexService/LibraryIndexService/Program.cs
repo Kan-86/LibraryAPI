@@ -27,8 +27,8 @@ namespace LibraryStorage
         {
             libs = new LibraryController();
             libs.GetLibrary(URL);
-            MessageListener mListener = new MessageListener();
-            mListener.MainAsync().GetAwaiter().GetResult();
+            libs.CreateBook();
+
             MainAsync().GetAwaiter().GetResult();
         }
 

@@ -1,5 +1,6 @@
 ﻿
 using LibraryStorage.Models;
+using LibraryStorage.Repo;
 using Nancy.Json;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,22 @@ namespace LibraryStorage.UI
             {
                 Console.WriteLine("No records found.");
             }
+        }
+
+        internal void CreateBook()
+        {
+            MessageListener mListener = new MessageListener();
+            mListener.MainAsync().GetAwaiter().GetResult();
+
+            var book = mListener.BookCreated();
+            if (book != null)
+            {
+                WebClient Client = new WebClient();
+                string Json = Newtonsoft.Json.JsonConvert.SerializeObject(book);
+                Client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                Client.UploadString("https://libtestapi.azurewebsites.net/books", "POST", Json);
+            }
+
         }
 
         public List<Books> GetList()
