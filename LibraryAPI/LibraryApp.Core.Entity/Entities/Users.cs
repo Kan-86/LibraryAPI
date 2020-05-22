@@ -9,6 +9,6 @@ namespace LibraryApp.Core.Entity.Entities
         public int Id { get; set; }
         public string Surname { get; set; }
         public string Lastname { get; set; }
-        public List<Books> BooksRented { get; set; }
+        public ICollection<Books> BooksRented { get; set; }
     }
 }

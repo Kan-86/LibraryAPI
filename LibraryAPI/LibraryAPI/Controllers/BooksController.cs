@@ -33,20 +33,20 @@ namespace LibraryAPI.Controllers
             }
         }
 
-        //// GET: api/Books/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public ActionResult<IEnumerable<Books>> GetById(int id)
-        //{
-        //    try
-        //    {
-        //        var result = _bookService.GetById(id);
-        //        return Ok(result);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e);
-        //    }
-        //}
+        // GET: api/Books/5
+        [HttpGet("{id}", Name = "Get")]
+        public ActionResult<IEnumerable<Books>> GetById(int id)
+        {
+            try
+            {
+                var result = _bookService.GetById(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
 
         // POST: api/Books
         [HttpPost]

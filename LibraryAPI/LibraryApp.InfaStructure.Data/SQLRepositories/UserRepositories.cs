@@ -44,16 +44,37 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
 
         public Users GetByName(string name)
         {
-            return ctx.User
+            var result = ctx.User
+                .Include(s => s.BooksRented)
                 .FirstOrDefault(b => b.Surname == name);
+
+            return result;
         }
 
         public Users Update(Users user)
         {
-            var result = ctx.User.SingleOrDefault(b => b.Id == user.Id);
-            result.BooksRented = user.BooksRented;
+            var usr = ctx.User
+                .Include(s => s.BooksRented)
+                 .FirstOrDefault(b => b.Id == user.Id);
+            
+            foreach (var bar in user.BooksRented)
+            {
+                var book = ctx.Book
+                    .FirstOrDefault(b => b.Id == bar.Id);
+                
+                //book.CurrentUser = usr;
+                book.UserId = user.Id;
+                book.InRent = true;
+                book.RentedDate = DateTime.Now;
+
+                usr.BooksRented.Add(book);
+
+                //ctx.Entry(book).State = EntityState.Modified;
+            }
+
+            //ctx.Entry(usr).State = EntityState.Modified;
             ctx.SaveChanges();
-            return user;
+            return usr;
         }
     }
 }

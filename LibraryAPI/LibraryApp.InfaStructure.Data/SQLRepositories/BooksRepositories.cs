@@ -40,8 +40,7 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
 
         public Books GetById(int id)
         {
-            return ctx.Book.
-                Include(c => c.CurrentUser)
+            return ctx.Book
                 .FirstOrDefault(b => b.Id == id);
         }
 
