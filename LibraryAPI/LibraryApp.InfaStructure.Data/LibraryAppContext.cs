@@ -13,8 +13,6 @@ namespace LibraryApp.InfaStructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-
-
         }
 
         public DbSet<Users> User { get; set; }

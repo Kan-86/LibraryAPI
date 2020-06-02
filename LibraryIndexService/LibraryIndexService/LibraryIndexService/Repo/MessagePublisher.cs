@@ -36,9 +36,9 @@ namespace LibraryStorage.Repo
                 var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data[i])))
                 {
                     ContentType = "application/json",
-                    Label = "Scientist",
+                    Label = "LibraryStorageData",
                     MessageId = i.ToString(),
-                    TimeToLive = TimeSpan.FromMinutes(2)
+                    TimeToLive = TimeSpan.FromHours(2)
                 };
 
                 await sender.SendAsync(message);

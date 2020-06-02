@@ -25,7 +25,8 @@ namespace LibraryStorage.Repo
 
         static async Task PeekMessagesAsync(string connectionString, string queueName)
         {
-            var receiver = new MessageReceiver(connectionString, queueName, ReceiveMode.PeekLock);
+            int prefetch = 10;
+            var receiver = new MessageReceiver(connectionString, queueName, ReceiveMode.ReceiveAndDelete, null, prefetch);
 
             Console.WriteLine("Browsing messages from Queue...");
             while (true)

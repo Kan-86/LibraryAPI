@@ -58,7 +58,7 @@ namespace LibraryStorage.UI
                 WebClient Client = new WebClient();
                 string Json = Newtonsoft.Json.JsonConvert.SerializeObject(book);
                 Client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                Client.UploadString("https://libtestapi.azurewebsites.net/books", "POST", Json);
+                Client.UploadString("https://librarywebapplication.azurewebsites.net/books", "POST", Json);
             }
 
         }

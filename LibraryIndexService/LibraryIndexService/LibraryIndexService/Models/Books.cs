@@ -13,5 +13,6 @@ namespace LibraryStorage.Models
         public Users CurrentUser { get; set; }
         public DateTime Released { get; set; }
         public DateTime RentedDate { get; set; }
+        public int RentedBookId { get; set; }
     }
 }

@@ -10,9 +10,11 @@ namespace LibraryIndex.Data
 {
     public class MessageListener
     {
-        private static dynamic dynamicList;
+        private static Dictionary<int, object> dics;
+        private static int key = 1;
         public async Task MainAsync(string queue, string connection)
         {
+            dics = new Dictionary<int, object>();
             await PeekMessagesAsync(connection, queue);
         }
 
@@ -30,8 +32,17 @@ namespace LibraryIndex.Data
                     // If the returned message value is null, we have reached the bottom of the log
                     if (message != null)
                     {
+                        
+                        
                         var body = message.Body;
-                        dynamicList = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
+
+                        var dynamicList = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(body));
+
+                        if (!dics.ContainsKey(key))
+                        {
+                            dics.Add(key, dynamicList);
+                        }
+                        key+=1;
                         lock (Console.Out)
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -68,9 +79,9 @@ namespace LibraryIndex.Data
             await receiver.CloseAsync();
         }
 
-        public dynamic PeekQueue()
+        public Dictionary<int, object> PeekQueue()
         {
-            return dynamicList;
+            return dics;
         }
     }
 }

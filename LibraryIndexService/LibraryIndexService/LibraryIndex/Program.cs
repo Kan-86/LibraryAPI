@@ -25,6 +25,7 @@ namespace LibraryIndex
 
         private static void LibraryIndexPicker(string choice)
         {
+
             indexController = new IndexController();
             switch (choice)
             {

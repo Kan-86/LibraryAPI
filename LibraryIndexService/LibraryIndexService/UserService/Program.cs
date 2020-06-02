@@ -6,7 +6,7 @@ namespace UserService
 {
     class Program
     {
-        private static string URL = "https://libtestapi.azurewebsites.net/users";
+        private static string URL = "https://librarywebapplication.azurewebsites.net/users";
         private static UserController users;
         private static MessagePublisher mPub;
         static void Main(string[] args)

@@ -5,7 +5,7 @@ namespace LibraryStorage
 {
     class Program
     {
-        private static string URL = "https://libtestapi.azurewebsites.net/books";
+        private static string URL = "https://librarywebapplication.azurewebsites.net/books";
         private static StorageController libs;
         private static MessagePublisher mPub;
 

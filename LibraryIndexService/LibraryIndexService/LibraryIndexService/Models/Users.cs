@@ -10,5 +10,6 @@ namespace LibraryStorage.Models
         public string Surname { get; set; }
         public string Lastname { get; set; }
         public List<Books> BooksRented { get; set; }
+        public int BookRentedId { get; set; }
     }
 }

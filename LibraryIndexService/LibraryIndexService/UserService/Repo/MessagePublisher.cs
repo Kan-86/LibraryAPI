@@ -37,7 +37,7 @@ namespace UserService.Repo
                     ContentType = "application/json",
                     Label = "Scientist",
                     MessageId = i.ToString(),
-                    TimeToLive = TimeSpan.FromMinutes(2)
+                    TimeToLive = TimeSpan.FromHours(2)
                 };
 
                 await sender.SendAsync(message);

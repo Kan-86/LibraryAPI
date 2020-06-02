@@ -20,7 +20,7 @@ namespace LibraryIndex.Data
 
         static async Task SendMessagesAsync(string connectionString, string queueName)
         {
-            if (queueName == "libraryindexqueue")
+            if (queueName == "libraryaddbookqueue")
             {
                 CreateBook();
             }
@@ -32,9 +32,9 @@ namespace LibraryIndex.Data
                 var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(bookList[i])))
                 {
                     ContentType = "application/json",
-                    Label = "Scientist",
+                    Label = "CreatingAbook",
                     MessageId = i.ToString(),
-                    TimeToLive = TimeSpan.FromMinutes(2)
+                    TimeToLive = TimeSpan.FromHours(2),
                 };
 
                 await sender.SendAsync(message);

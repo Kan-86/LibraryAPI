@@ -10,5 +10,8 @@ namespace LibraryApp.Core.Entity.Entities
         public string Surname { get; set; }
         public string Lastname { get; set; }
         public ICollection<Books> BooksRented { get; set; }
+        public int RentedBook { get; set; }
+        public int BookRentedId { get; set; }
+
     }
 }

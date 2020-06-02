@@ -56,23 +56,21 @@ namespace LibraryApp.InfaStructure.Data.SQLRepositories
             var usr = ctx.User
                 .Include(s => s.BooksRented)
                  .FirstOrDefault(b => b.Id == user.Id);
-            
-            foreach (var bar in user.BooksRented)
-            {
-                var book = ctx.Book
-                    .FirstOrDefault(b => b.Id == bar.Id);
-                
-                //book.CurrentUser = usr;
-                book.UserId = user.Id;
-                book.InRent = true;
-                book.RentedDate = DateTime.Now;
 
-                usr.BooksRented.Add(book);
+            var book = ctx.Book
+                    .FirstOrDefault(b => b.Id == user.BookRentedId);
 
-                //ctx.Entry(book).State = EntityState.Modified;
-            }
+            //book.CurrentUser = usr;
+            book.UserId = user.Id;
+            book.InRent = true;
+            book.RentedDate = DateTime.Now;
 
-            //ctx.Entry(usr).State = EntityState.Modified;
+            usr.BooksRented.Add(book);
+
+            ctx.Entry(book).State = EntityState.Modified;
+
+
+            ctx.Entry(usr).State = EntityState.Modified;
             ctx.SaveChanges();
             return usr;
         }
